@@ -1,0 +1,21 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    owner-name.json: |
+      {
+        "FirstName" : "Earou",
+        "LastName" : "Huang"
+      }
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: 2019-04-23T13:19:06Z
+    name: test-cm
+    namespace: default
+    resourceVersion: "253904"
+    selfLink: /api/v1/namespaces/default/configmaps/test-cm
+    uid: 5f106117-65ca-11e9-ae6a-42010a8c0031
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

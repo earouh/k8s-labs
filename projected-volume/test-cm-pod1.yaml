@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-cm2 
+spec:
+  containers:
+  - name: test-cm-var
+    image: busybox
+    args:
+    - sleep
+    - "86400"
+    env:
+      - name: OWNER_NAME
+        valueFrom:
+          configMapKeyRef:
+            name: test-cm
+            key: owner-name.json
