@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: http-probe
+  name: test-http-probe
+spec:
+  volumes:
+  - name: html-volume
+    emptyDir: {}
+  initContainers:
+  - name: init-html
+    image: busybox
+    command:
+    - /bin/sh
+    - "-c" 
+    - |
+      touch /tmp/liveness
+      touch /tmp/readiness
+    volumeMounts:
+    - mountPath: /tmp
+      name: html-volume
+  containers:
+  - name: test-http
+    image: nginx:alpine
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: html-volume
+    livenessProbe:
+      httpGet:
+            path: /liveness
+            port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+            path: /readiness
+            port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 6
+
